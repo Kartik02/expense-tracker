@@ -168,12 +168,17 @@ const ExpenseTracker = () => {
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 ">Amount</label>
                                 <p className="text-sm text-gray-500 mt-1">(-100 = expense, 100 = income)</p>
-                                <input type="number" value={amount} onChange={(e) => {
-                                    const input = e.target.value.replace(/[^0-9-]/g, ""); // Remove non-numeric characters
-                                    if (input.length <= 20) {
-                                        setAmount(input);
-                                    }
-                                }} required
+                                <input
+                                    type="text"  // Changed to "text" to prevent unwanted restrictions from "number" type
+                                    value={amount}
+                                    onChange={(e) => {
+                                        const input = e.target.value;
+
+                                        // Allow only numbers, one decimal point, and an optional leading "-"
+                                        if (/^-?\d*\.?\d*$/.test(input) && input.length <= 20) {
+                                            setAmount(input);
+                                        }
+                                    }} required
                                     className="mt-1 block w-full px-4 py-3 rounded-md border border-gray-300 shadow-sm focus-visible:outline-2  focus-visible:outline-blue-500" placeholder="Enter amount..." />
                             </div>
                             <button type="submit" className="w-full bg-blue-600 text-white py-3 px-4 rounded-md">Add transaction</button>
