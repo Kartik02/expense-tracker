@@ -3,6 +3,7 @@ import { auth } from "../firebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { FiLogIn } from "react-icons/fi";
+import { FirebaseError } from "firebase/app";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -28,8 +29,15 @@ const Login = () => {
       }
 
       navigate("/expensetracker");
-    } catch {
-      setError("Invalid email or password");
+    } catch (error) {
+      if (
+        error instanceof FirebaseError &&
+        error.code === "auth/network-request-failed"
+      ) {
+        setError("No internet connection. Please try again.");
+      } else {
+        setError("Invalid email or password");
+      }
     }
   };
 
@@ -44,8 +52,12 @@ const Login = () => {
         <p className="text-gray-500 mb-5">
           Login to continue tracking your expenses
         </p>
-        {error && <p className="text-red-500 text-sm">{error}</p>}
         <form onSubmit={handleLogin} className="space-y-4">
+          {error && (
+            <p className="text-red-600 text-sm font-semibold bg-red-100 p-2 rounded-md">
+              {error}
+            </p>
+          )}
           <input
             type="email"
             placeholder="Email"

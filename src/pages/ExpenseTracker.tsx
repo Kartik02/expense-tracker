@@ -199,31 +199,37 @@ const ExpenseTracker = () => {
                   {displayedTransactions.map((transaction) => (
                     <div
                       key={transaction.id}
-                      className="grid grid-cols-[0.8fr_0.8fr_1.5fr_0.1fr] gap-1 p-3 border rounded-lg items-center bg-white shadow"
+                      className="flex flex-col gap-2 p-3 border rounded-lg w-full bg-white shadow"
                     >
-                      <span className="font-medium truncate">
-                        {transaction.description}
-                      </span>
-                      <span className="text-sm text-gray-500">
-                        {formatDate(new Date(transaction.timestamp))}
-                      </span>
-                      <span
-                        className={clsx(
-                          transaction.amount > 0
-                            ? "text-green-500"
-                            : "text-red-500"
-                        )}
-                      >
-                        {transaction.amount > 0
-                          ? `+ ${formatCurrency(transaction.amount)}`
-                          : `- ${formatCurrency(Math.abs(transaction.amount))}`}
-                      </span>
-                      <button
-                        onClick={() => handleDelete(transaction.id)}
-                        className="text-red-500 hover:text-red-700"
-                      >
-                        <FiTrash size={20} />
-                      </button>
+                      <div className="flex justify-between items-center">
+                        <span className="font-medium truncate">
+                          {transaction.description}
+                        </span>
+                        <span className="text-xs text-gray-500">
+                          {formatDate(new Date(transaction.timestamp))}
+                        </span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span
+                          className={clsx(
+                            transaction.amount > 0
+                              ? "text-green-500"
+                              : "text-red-500"
+                          )}
+                        >
+                          {transaction.amount > 0
+                            ? `+ ${formatCurrency(transaction.amount)}`
+                            : `- ${formatCurrency(
+                                Math.abs(transaction.amount)
+                              )}`}
+                        </span>
+                        <button
+                          onClick={() => handleDelete(transaction.id)}
+                          className="text-red-500 hover:text-red-700"
+                        >
+                          <FiTrash size={20} />
+                        </button>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -267,7 +273,7 @@ const ExpenseTracker = () => {
                   type="text"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  maxLength={20}
+                  maxLength={25}
                   required
                   className="mt-1 block w-full px-4 py-3 rounded-md border border-gray-300 shadow-sm focus-visible:outline-2  focus-visible:outline-blue-500"
                   placeholder="Enter Short description..."
@@ -287,7 +293,7 @@ const ExpenseTracker = () => {
                     const input = e.target.value;
 
                     // Allow only numbers, one decimal point, and an optional leading "-"
-                    if (/^-?\d*\.?\d*$/.test(input) && input.length <= 20) {
+                    if (/^-?\d*\.?\d*$/.test(input) && input.length <= 15) {
                       setAmount(input);
                     }
                   }}

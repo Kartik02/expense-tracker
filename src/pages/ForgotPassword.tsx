@@ -3,6 +3,7 @@ import { auth } from "../firebaseConfig";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { FiMail } from "react-icons/fi";
+import { FirebaseError } from "firebase/app";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -17,8 +18,15 @@ const ForgotPassword = () => {
       await sendPasswordResetEmail(auth, email);
       alert("Password reset link has been sent to your email.");
       setTimeout(() => navigate("/login"), 3000); // Redirect after 3s
-    } catch {
-      setError("Email not found. Please try again.");
+    } catch (error) {
+      if (
+        error instanceof FirebaseError &&
+        error.code === "auth/network-request-failed"
+      ) {
+        setError("No internet connection. Please try again.");
+      } else {
+        setError("Email not found. Please try again.");
+      }
     }
   };
 
@@ -32,8 +40,12 @@ const ForgotPassword = () => {
         <p className="text-gray-500 mb-5">
           Enter your email to receive a reset link
         </p>
-        {error && <p className="text-red-500 text-sm">{error}</p>}
         <form onSubmit={handleSendOTP} className="space-y-4">
+          {error && (
+            <p className="text-red-600 text-sm font-semibold bg-red-100 p-2 rounded-md">
+              {error}
+            </p>
+          )}
           <input
             type="email"
             placeholder="Enter your email"

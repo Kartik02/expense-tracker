@@ -7,6 +7,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { FiUserPlus } from "react-icons/fi";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { FirebaseError } from "firebase/app";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -51,8 +52,20 @@ const Register = () => {
 
       // Log out user after registration (ensures they must verify email first)
       auth.signOut();
-    } catch (error: any) {
-      setError(error.message || "Registration failed. Please try again.");
+    } catch (error) {
+      if (error instanceof FirebaseError) {
+        if (error.code === "auth/email-already-in-use") {
+          setError(
+            "This email is already registered. Please log in or use a different email."
+          );
+        } else if (error.code === "auth/network-request-failed") {
+          setError("No internet connection. Please try again.");
+        } else {
+          setError("Registration failed. Please try again.");
+        }
+      } else {
+        setError("An unexpected error occurred. Please try again.");
+      }
     }
   };
 
