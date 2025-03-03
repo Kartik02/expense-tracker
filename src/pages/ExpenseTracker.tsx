@@ -257,7 +257,11 @@ const ExpenseTracker = () => {
           )}
 
           {/* Error Message */}
-          {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+          {error && (
+            <p className="text-red-600 text-sm font-semibold bg-red-100 p-2 rounded-md">
+              {error}
+            </p>
+          )}
 
           {/* Add Transaction Form */}
           <form onSubmit={handleSubmit}>
