@@ -1,50 +1,57 @@
-# React + TypeScript + Vite
+# 💰 Expense Checker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![License](https://img.shields.io/badge/license-MIT-green)
+![React](https://img.shields.io/badge/React-TypeScript-blue)
+![Vite](https://img.shields.io/badge/Built%20With-Vite-purple)
+![Deployment](https://img.shields.io/badge/Deployed-Vercel-black)
 
-Currently, two official plugins are available:
+**Expense Checker** is a lightweight web application that helps users **track and manage daily expenses** in a simple and intuitive way.  
+The project focuses on clean UI, modern frontend practices, and real-world usability.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🔗 **Live Demo:** https://expensechecker.vercel.app/
 
-## Expanding the ESLint configuration
+---
+<!--
+## 📸 Preview
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+![Expense Tracker UI](https://user-images.githubusercontent.com/placeholder/expense-tracker-ui.png)
 
-- Configure the top-level `parserOptions` property like this:
+![Expense Tracker Demo](https://user-images.githubusercontent.com/placeholder/expense-tracker-demo.gif)
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+---
+-->
+## 🧠 What It Does
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+- ➕ Add expenses with description & amount
+- 📋 List all expenses clearly
+- 📊 Helps users understand spending habits
+- 📱 Fully responsive on mobile & desktop
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+---
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## 🧰 Tech Used
+
+- **React + TypeScript**
+- **Vite** (fast build tool)
+- **Tailwind CSS**
+- **Deployed on Vercel**
+---
+
+## 🏆 Why It Matters
+
+Great project to showcase:
+
+- Real web app logic with **React Hooks**
+- **TypeScript** for safer code
+- Modern tooling & deployment workflow
+- User-focused UI
+
+---
+
+## 🚀 Run Locally
+
+```bash
+git clone https://github.com/Kartik02/expense-tracker.git
+cd expense-tracker
+npm install
+npm run dev
